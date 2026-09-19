@@ -1,0 +1,181 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', monospace;
+}
+
+/* Fondo negro retro */
+body {
+  background-color: #05050d;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Tarjeta Arcade Principal */
+.pacman-card {
+  background-color: #0f0f1f;
+  border: 4px solid #1919a6;
+  border-radius: 12px;
+  padding: 35px 20px;
+  text-align: center;
+  max-width: 650px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(25, 25, 166, 0.8);
+}
+
+/* Pac-Man Decorativo */
+.pacman-graphic {
+  width: 48px;
+  height: 48px;
+  background-color: #ffff00;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  clip-path: polygon(100% 0%, 100% 30%, 50% 50%, 100% 70%, 100% 100%, 0% 100%, 0% 0%);
+}
+
+/* Título */
+.main-title {
+  color: #ffff00;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0px #1919a6;
+}
+
+/* Subtítulo */
+.subtitle {
+  color: #8888aa;
+  font-size: 0.55rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+/* Fantasmas */
+.ghost-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.ghost-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ghost-dot.blinky { background-color: #ff0000; }
+.ghost-dot.pinky  { background-color: #ffb8ff; }
+.ghost-dot.inky   { background-color: #00ffff; }
+.ghost-dot.clyde  { background-color: #ffb852; }
+
+/* Botón empezar a desarrollar */
+.btn-start {
+  display: inline-block;
+  background-color: #ffff00;
+  color: #000000;
+  padding: 14px 20px;
+  font-size: 0.65rem;
+  text-decoration: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-start:hover {
+  background-color: #00ff66;
+  transform: translateY(-2px);
+}
+
+/* SECCIÓN DE 10 NIVELES */
+.levels-section {
+  border-top: 3px dashed #1919a6;
+  padding-top: 25px;
+  margin-top: 10px;
+}
+
+.levels-title {
+  color: #00ffff;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+/* Indicador de progreso (niveles completados) */
+.progress-indicator {
+  font-size: 0.5rem;
+  color: #00ff66;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Grilla de 10 Niveles */
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+/* Tarjeta individual de Nivel */
+.level-card {
+  background-color: #05050a;
+  border: 2px solid #333366;
+  border-radius: 6px;
+  padding: 12px 8px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.level-num {
+  font-size: 0.8rem;
+  color: #666688;
+}
+
+.level-status {
+  font-size: 0.4rem;
+  color: #555577;
+}
+
+/* Estado Desbloqueado / Disponible */
+.level-card.unlocked {
+  border-color: #ffff00;
+  background-color: rgba(255, 255, 0, 0.05);
+}
+
+.level-card.unlocked .level-num {
+  color: #ffff00;
+}
+
+.level-card.unlocked .level-status {
+  color: #00ff66;
+}
+
+.level-card.unlocked:hover {
+  border-color: #00ff66;
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+/* Estado Resuelto (Para cuando agreguemos las validaciones) */
+.level-card.completed {
+  border-color: #00ff66;
+  background-color: rgba(0, 255, 102, 0.1);
+}
+
+.level-card.completed .level-num,
+.level-card.completed .level-status {
+  color: #00ff66;
+}

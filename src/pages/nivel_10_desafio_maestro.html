@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%9F%A1%3C/text%3E%3C/svg%3E">
+    <title>Pac-Man CSS Arcade - Nivel 10: Desafío Maestro Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #05050d;
+            --arcade-blue: #1919a6;
+            --pacman-yellow: #ffff00;
+            --neon-green: #00ff66;
+            --neon-pink: #ff0077;
+            --text-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .arcade-container {
+            width: 100%;
+            max-width: 750px;
+            background-color: #0f0f1f;
+            border: 4px solid var(--arcade-blue);
+            box-shadow: 0 0 20px rgba(25, 25, 166, 0.8);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .arcade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px dashed var(--arcade-blue);
+            padding-bottom: 15px;
+        }
+
+        .level-title { font-size: 0.9rem; color: var(--pacman-yellow); }
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: #222233;
+            color: #8888aa;
+            border: 2px solid #444466;
+        }
+        .status-badge.solved {
+            background-color: rgba(0, 255, 102, 0.2);
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .instructions {
+            font-size: 0.7rem;
+            line-height: 1.6;
+            color: #ccccff;
+            background-color: #000000;
+            padding: 15px;
+            border: 2px solid #333366;
+            border-radius: 6px;
+        }
+
+        .maze-container {
+            width: 100%;
+            height: 220px;
+            background-color: #000000;
+            border: 3px solid var(--arcade-blue);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #pacman {
+            width: 45px;
+            height: 45px;
+            background-color: var(--pacman-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            transition: all 0.5s ease;
+            box-shadow: 0 0 12px var(--pacman-yellow);
+            z-index: 1;
+        }
+
+        #crownGoal {
+            position: absolute;
+            top: 110px;
+            left: 360px;
+            font-size: 1.8rem;
+        }
+
+        .ghost {
+            position: absolute;
+            font-size: 1.5rem;
+            z-index: 10;
+        }
+
+        .editor-container {
+            background-color: #05050a;
+            border: 2px solid var(--arcade-blue);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .code-block { font-size: 0.75rem; color: #00ffff; line-height: 1.8; }
+        .code-input {
+            background-color: #111122;
+            border: 2px solid var(--arcade-blue);
+            color: var(--neon-green);
+            font-size: 0.75rem;
+            padding: 6px;
+            width: 110px;
+            border-radius: 4px;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn { padding: 12px 20px; font-size: 0.7rem; border: none; border-radius: 6px; cursor: pointer; }
+        .btn-run { background-color: var(--pacman-yellow); color: #000; }
+        .btn-restart {
+            background-color: var(--neon-green);
+            color: #000;
+            display: none;
+            text-decoration: none;
+        }
+        .btn-restart.visible { display: inline-block; }
+        .message-box { font-size: 0.65rem; min-height: 20px; }
+        .message-box.success { color: var(--neon-green); }
+        .message-box.error { color: var(--neon-pink); }
+        .back-home { display: inline-block; margin-bottom: 14px; font-size: 0.55rem; color: #00ffff; text-decoration: none; border: 2px solid #333366; padding: 6px 10px; border-radius: 4px; transition: all 0.2s ease; }
+        .back-home:hover { border-color: #00ff66; color: #00ff66; }
+    </style>
+</head>
+<body>
+
+<div class="arcade-container">
+    <a href="../../index.html" class="back-home">⬅ MENÚ</a>
+    <div class="arcade-header">
+        <div class="level-title">NIVEL 10: DESAFÍO MAESTRO</div>
+        <div class="status-badge" id="statusBadge">PENDIENTE</div>
+    </div>
+
+    <div class="instructions">
+        <span>GRAN DESAFÍO MAESTRO:</span> Los fantasmas bloquean la trayectoria en la capa superior (z-index: 10). Pasa por encima de ellos ajustando las coordenadas y un mayor orden de apilamiento.<br><br>
+        <strong>RETO:</strong> Usa <code>position: absolute</code>, <code>top:</code>, <code>left:</code> y <code>z-index:</code> para reclamar la Corona Arcade.
+    </div>
+
+    <div class="maze-container">
+        <div id="pacman">ᗧ</div>
+        <div class="ghost" style="top: 110px; left: 180px;">👻</div>
+        <div class="ghost" style="top: 110px; left: 270px;">👻</div>
+        <div id="crownGoal">👑</div>
+    </div>
+
+    <div class="editor-container">
+        <div class="code-block">
+            #pacman {<br>
+            &nbsp;&nbsp;position: <input type="text" id="posInput" class="code-input" aria-label="valor de position" placeholder="">;<br>
+            &nbsp;&nbsp;top: <input type="text" id="topInput" class="code-input" aria-label="valor de top" placeholder="">;<br>
+            &nbsp;&nbsp;left: <input type="text" id="leftInput" class="code-input" placeholder="">;<br>
+            &nbsp;&nbsp;z-index: <input type="text" id="zIndexInput" class="code-input" aria-label="valor de z-index" placeholder="">;<br>
+            }
+        </div>
+    </div>
+
+    <div class="message-box" id="msgBox"></div>
+
+    <div class="actions-row">
+        <button class="btn btn-run" onclick="executeCode()">EJECUTAR CÓDIGO</button>
+        <a href="../../index.html" class="btn btn-restart" id="btnRestart" onclick="localStorage.removeItem('pacman_max_level')">VOLVER AL INICIO 🏠</a>
+    </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+    function playSound(type) {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            if (type === 'win') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
+                osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                osc.start(); osc.stop(ctx.currentTime + 0.5);
+            } else {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(90, ctx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                osc.start(); osc.stop(ctx.currentTime + 0.2);
+            }
+        } catch(e){}
+    }
+
+    function livePreview() {
+        const posVal = document.getElementById('posInput').value.trim();
+        const topVal = document.getElementById('topInput').value.trim();
+        const leftVal = document.getElementById('leftInput').value.trim();
+        const zVal = document.getElementById('zIndexInput').value.trim();
+        const pacman = document.getElementById('pacman');
+        if (posVal) pacman.style.position = posVal;
+        pacman.style.top = topVal;
+        pacman.style.left = leftVal;
+        pacman.style.zIndex = zVal;
+    }
+
+    // Pista que aparece si el jugador lleva más de 30 s sin resolver el nivel
+    // (la lógica está en main.js). Orienta sin dar la respuesta.
+    const LEVEL_HINT = "Combina lo aprendido: un position que permita usar top y left dentro del recuadro, las coordenadas de la corona según las medidas del recuadro, y un z-index mayor que el de los fantasmas (10).";
+
+    // Devuelve true solo si TODOS los campos del editor tienen la respuesta correcta.
+    // La usan tanto executeCode() como main.js (para pasar de nivel solo, sin pulsar el botón).
+    function isSolved() {
+        const posVal = document.getElementById('posInput').value.trim();
+        const topVal = document.getElementById('topInput').value.trim();
+        const leftVal = document.getElementById('leftInput').value.trim();
+        const zVal = document.getElementById('zIndexInput').value.trim();
+        return posVal === 'absolute' && topVal === '110px' && leftVal === '360px' && zVal === '50';
+    }
+
+    function executeCode() {
+        const posVal = document.getElementById('posInput').value.trim();
+        const topVal = document.getElementById('topInput').value.trim();
+        const leftVal = document.getElementById('leftInput').value.trim();
+        const zVal = document.getElementById('zIndexInput').value.trim();
+        const pacman = document.getElementById('pacman');
+        const msgBox = document.getElementById('msgBox');
+        const badge = document.getElementById('statusBadge');
+        const btnRestart = document.getElementById('btnRestart');
+
+        if (isSolved()) {
+            pacman.style.position = 'absolute';
+            pacman.style.top = '110px';
+            pacman.style.left = '360px';
+            pacman.style.zIndex = '50';
+            
+            msgBox.className = 'message-box success';
+            msgBox.innerText = '¡FELICIDADES MAESTRO! Has conquistado todos los niveles de posicionamiento CSS.';
+            badge.className = 'status-badge solved';
+            badge.innerText = '✓ COMPLETO';
+            btnRestart.classList.add('visible');
+            completeLevel(10);
+            playSound('win');
+        } else {
+            msgBox.className = 'message-box error';
+            msgBox.innerText = '❌ INCORRECTO. Los fantasmas siguen bloqueando el paso. Revisa position, top, left y z-index.';
+            playSound('error');
+        }
+    }
+</script>
+</body>
+</html>

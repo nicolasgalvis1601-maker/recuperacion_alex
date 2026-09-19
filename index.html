@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pacman Position - Inicio</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%22.9em%22%20font-size%3D%2290%22%3E%F0%9F%9F%A1%3C/text%3E%3C/svg%3E">
+  
+  <!-- Fuente Retro Pixel Art de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./src/styles/styles.css">
+</head>
+<body>
+
+  <!-- Tarjeta Central Principal -->
+  <main class="pacman-card">
+    
+    <!-- Pacman Decorativo Superior -->
+    <div class="pacman-graphic"></div>
+
+    <!-- Título Principal -->
+    <h1 class="main-title">PACMAN POSITION</h1>
+    
+    <!-- Subtítulo -->
+    <p class="subtitle">APRENDE POSICIONAMIENTO CSS JUGANDO NIVEL POR NIVEL.</p>
+
+    <!-- Fantasmas Decorativos -->
+    <div class="ghost-dots">
+      <span class="ghost-dot blinky"></span>
+      <span class="ghost-dot pinky"></span>
+      <span class="ghost-dot inky"></span>
+      <span class="ghost-dot clyde"></span>
+    </div>
+
+    <!-- Botón de Inicio Rápido -->
+    <a href="./src/pages/nivel_1_position_relative.html" class="btn-start">EMPEZAR A DESARROLLAR</a>
+
+    <!-- SECCIÓN DE SELECCIÓN DE NIVELES (10 NIVELES) -->
+    <section class="levels-section">
+      <h2 class="levels-title">SELECCIONAR NIVEL</h2>
+      <p class="progress-indicator" id="progressIndicator">0 / 10 NIVELES COMPLETADOS</p>
+      
+      <div class="levels-grid">
+        <a href="./src/pages/nivel_1_position_relative.html" class="level-card unlocked" id="level-1">
+          <span class="level-num">01</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_2_position_absolute.html" class="level-card" id="level-2">
+          <span class="level-num">02</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_3_position_fixed.html" class="level-card" id="level-3">
+          <span class="level-num">03</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_4_position_sticky.html" class="level-card" id="level-4">
+          <span class="level-num">04</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_5_desafio_integrador.html" class="level-card" id="level-5">
+          <span class="level-num">05</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_6_inset.html" class="level-card" id="level-6">
+          <span class="level-num">06</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_7_coordenadas_negativas.html" class="level-card" id="level-7">
+          <span class="level-num">07</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_8_sticky_horizontal.html" class="level-card" id="level-8">
+          <span class="level-num">08</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_9_stacking_context.html" class="level-card" id="level-9">
+          <span class="level-num">09</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+
+        <a href="./src/pages/nivel_10_desafio_maestro.html" class="level-card" id="level-10">
+          <span class="level-num">10</span>
+          <span class="level-status">DISPONIBLE</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+<script src="./src/js/main.js"></script>
+</body>
+</html>
