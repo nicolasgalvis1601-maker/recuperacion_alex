@@ -100,8 +100,8 @@
             justify-content: center;
             font-size: 1.2rem;
             position: relative;
-            top: 120px;
-            left: 250px;
+            margin-top: 120px;
+            margin-left: 250px;
             transition: all 0.5s ease;
             box-shadow: 0 0 12px var(--pacman-yellow);
             z-index: 10;
@@ -161,7 +161,7 @@
 
     <div class="instructions">
         <span>CONCEPTO:</span> Usar valores negativos en <code>top</code> o <code>left</code> en <code>position: relative</code> desplaza al elemento en dirección opuesta a su origen.<br><br>
-        <strong>RETO:</strong> Pac-Man empieza en <code>top:</code> y <code>left:</code>. Muévelo hacia arriba y a la izquierda usando <code>top:</code> y <code>left:</code> para alcanzar la Galleta.
+        <strong>RETO:</strong> Pac-Man empieza en <code>top: 120px</code> y <code>left: 250px</code>. Muévelo hacia arriba y a la izquierda usando <code>top:</code> y <code>left:</code> para alcanzar la Galleta.
     </div>
 
     <div class="maze-container">
@@ -244,8 +244,9 @@
         const btnNext = document.getElementById('btnNext');
 
         if (isSolved()) {
-            pacman.style.top = '40px';
-            pacman.style.left = '100px';
+            // No se fuerza la posición: top:-80px / left:-150px ya deja a
+            // Pac-Man exactamente sobre la Galleta gracias al desplazamiento
+            // base (margin-top/margin-left) definido en el CSS de #pacman.
             msgBox.className = 'message-box success';
             msgBox.innerText = '¡GENIAL! Has dominado el desplazamiento con valores negativos.';
             badge.className = 'status-badge solved';
