@@ -232,7 +232,7 @@
     function isSolved() {
         const posVal = document.getElementById('posInput').value.trim();
         const leftVal = document.getElementById('leftInput').value.trim();
-        return posVal === 'sticky' && leftVal === '0px';
+        return posVal === 'sticky' && leftVal === '20px';
     }
 
     function executeCode() {
@@ -245,7 +245,7 @@
 
         if (isSolved()) {
             pacman.style.position = 'sticky';
-            pacman.style.left = '0px';
+            pacman.style.left = '20px';
             msgBox.className = 'message-box success';
             msgBox.innerText = '¡FANTÁSTICO! Pac-Man permanece visible en el margen izquierdo del túnel.';
             badge.className = 'status-badge solved';
